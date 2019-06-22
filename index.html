@@ -1,0 +1,120 @@
+<!--
+Author: Jim Li
+Date: June 22nd, 2018
+
+This HTML file acts as the main page for the website.
+It will serve as a login page.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> Portfolio Manager </title>
+
+<style>
+/* Style the header */
+header {
+    padding: 30px;
+    font-size: 36px;
+    text-align: center;
+    background-color: #729FCF;
+}
+
+/* These two boxes go side-by-side */
+nav {
+    float: left;
+    width: 30%;
+    height: 300px;
+    background-color: #BABDB6;
+    padding: 20px;
+}
+
+/* nav's ul should have no bullet points */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+article {
+    float: left;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+
+
+/* Clear floats after the columns */
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+footer {
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<!-- Include the Vue Library -->
+<script src="https://unpkg.com/vue"></script>
+
+<header>
+<h1> Portfolio Manager </h1>
+</header>
+
+<section>
+    <nav>
+        <ul>
+            <li> the </li>
+            <li> element </li>
+        </ul>
+    </nav>
+
+    <article>
+        <h2> About Us </h2>
+        <p> This website is designed to make it easy
+        for clients <br /> to manage and analyze their portfolio
+        of public corporations. </p>
+    </article>
+</section>
+
+<footer>
+    <p> (C) Jim Li 2019 </p>
+</footer>
+
+<!-- Vue JS Example -->
+
+<!--
+<div id="app">
+	<h2>{{ product }} are in stock.</h2>
+</div>
+
+
+<script>
+	const app = new Vue({
+		el : '#app',
+		data: {
+			product: 'Boots'
+		}
+	})
+</script>
+-->
+
+</body>
+</html>
