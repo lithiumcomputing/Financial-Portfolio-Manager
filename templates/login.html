@@ -1,0 +1,26 @@
+<!--
+Author: Jim Li
+Date: June 22nd, 2018
+
+Front-end handling of login requests.
+-->
+
+<html>
+<head>
+    <title>
+        Login
+    </title>
+</head>
+
+<body>
+    <h1> Login Page </h1>
+    <table border = 1>
+         {% for key, value in result.items() %}
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+         {% endfor %}
+    </table>
+</body>
+</html>

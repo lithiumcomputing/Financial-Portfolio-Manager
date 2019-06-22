@@ -39,6 +39,7 @@ nav ul {
 article {
     float: left;
     padding: 20px;
+    height: 300px;
     background-color: #f1f1f1;
 }
 
@@ -82,13 +83,13 @@ footer {
 
     <!-- The navigation pane will have a login section. -->
     <nav>
-        <form>
+        <form action="http://localhost:5000/login" method="POST">
         <ul>
             <li> <p> User Name: </p> </li>
             <li> <input name="username" type="text" /> </li>
             <li> <p> Password: </p> </li>
             <li> <input name="password" type="text" /> </li>
-            <button> Login </button>
+            <input type="submit" value="Login" />
         </ul>
         </form>
     </nav>
