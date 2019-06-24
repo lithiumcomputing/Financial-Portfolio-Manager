@@ -83,7 +83,7 @@ footer {
 
     <!-- The navigation pane will have a login section. -->
     <nav>
-        <form action="http://localhost:5000/login" method="POST">
+        <form action="http://{{hostname}}:{{portNum}}/login" method="POST">
         <ul>
             <li> <p> User Name: </p> </li>
             <li> <input name="username" type="text" /> </li>
@@ -92,6 +92,8 @@ footer {
             <input type="submit" value="Login" />
         </ul>
         </form>
+
+        <p> {{hostname}}:{{portNum}} </p>
     </nav>
 
     <!-- Main Website Description -->
