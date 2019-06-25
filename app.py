@@ -14,17 +14,18 @@ app = Flask(__name__)
 hostname = "192.168.0.17"
 portNum = 5000
 
+@app.route("/")
 ##
 # Loads the home page.
-@app.route("/")
 def load_index():
     global hostname, portNum
     return render_template("index.html", hostname=hostname,\
         portNum=portNum)
 
-##
-# Handle user login
+
 @app.route("/login/", methods = ["GET", "POST"])
+##
+# Handles user login.
 def login_handler():
     resultHTML = "" # what to return
 
@@ -32,7 +33,6 @@ def login_handler():
     if request.method == "POST":
         # Get Login Information entered from the user.
         result = request.form
-        print(type(result.items()))
         loginInfoEntered = dict(result.items())
         username = loginInfoEntered["username"]
         password = loginInfoEntered["password"]
@@ -53,7 +53,8 @@ def login_handler():
         if len(cursor.fetchall()) <= 0:
             resultHTML = "<h1>LOGIN INCORRECT</h1>"
         else:
-            resultHTML = render_template("login.html", result = result)
+            resultHTML = render_template("login.html",\
+            result = result)
         conn.close()
 
         return resultHTML
@@ -62,6 +63,36 @@ def login_handler():
     # wrong with the login form.
     else:
         return "<b> GET METHOD ERROR </b>"
+
+@app.route("/create_account_page/create_account",
+    methods = ["GET", "POST"])
+##
+# Handles account creation.
+def create_account():
+    if request.method.upper() == "POST":
+        result = request.form
+        loginInfoEntered = dict(result.items())
+        username = loginInfoEntered["username"]
+        password = loginInfoEntered["password"]
+        password_retyped = loginInfoEntered["password_retyped"]
+
+        if password != password_retyped:
+            return create_account_page(error_msg=\
+            "passwords incorrect")
+        else:
+            return "Account Created"
+
+    else:
+        return "<b>Account Creation Error: GET METHOD</b>"
+
+@app.route("/create_account_page/")
+##
+# Displays the account creation page.
+#
+# @param error_msg Error Message of account creation.
+def create_account_page(error_msg=""):
+    return render_template("create_account_page.html",\
+    acct_creation_error=error_msg)
 
 # Main Program Area
 if __name__ == "__main__":
