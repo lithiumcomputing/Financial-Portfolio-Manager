@@ -1,0 +1,50 @@
+<!--
+Author: Jim Li
+Date: 24 June 2019
+
+Description: This page will help users create an account.
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Create an Account
+        </title>
+    </head>
+    <body>
+        <header>
+            <h1> Create an Account </h1>
+        </header>
+
+        <article class="">
+            <form action="create_account" method="POST">
+                <b> <span style="color: red;">
+                    {{ acct_creation_error }}
+
+                    {% if acct_creation_error != "" %}
+                        <script type="text/javascript">
+                            var stateObj = {}; // stateObj parameter
+                            window.history.replaceState(
+                                stateObj, "", ".");
+                        </script>
+                    {% endif %}
+                </span> </b>
+
+                <p>Username:</p>
+                <input type="text" name="username" value="" />
+                <p>Password:</p>
+                <input type="password" name="password" value="" />
+                <p> Re-type Password: </p>
+                <input type="password" name="password_retyped" value="" />
+                <br />
+                <button type="submit"> Submit </button>
+            </form>
+        </article>
+
+        <footer style="text-align: center;">
+            (C) Jim Li 2019
+        </footer>
+    </body>
+</html>
