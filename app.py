@@ -13,6 +13,7 @@ import sqlite3
 app = Flask(__name__)
 hostname = "192.168.0.17"
 portNum = 5000
+DATABASE_FILE = "PortfolioAccounts.db"
 
 @app.route("/")
 ##
@@ -27,6 +28,7 @@ def load_index():
 ##
 # Handles user login.
 def login_handler():
+    global DATABASE_FILE
     resultHTML = "" # what to return
 
     # The request method should be POST
@@ -38,7 +40,6 @@ def login_handler():
         password = loginInfoEntered["password"]
 
         # Check if this information is in the database.
-        DATABASE_FILE = "PortfolioAccounts.db"
         conn = sqlite3.connect(DATABASE_FILE)
 
         # TODO: This is a really unsafe way to store/access
@@ -78,10 +79,37 @@ def create_account():
 
         if password != password_retyped:
             return create_account_page(error_msg=\
-            "passwords incorrect")
+            "Password Incorrect")
+        elif password == "":
+            return create_account_page(error_msg=\
+            "Cannot Have Blank Password!")
         else:
-            return "Account Created"
+            # Check if username already exists.
+            conn = sqlite3.connect(DATABASE_FILE)
 
+            sqlQueryUsername = \
+            """
+            SELECT USERNAME FROM ACCOUNTS
+            WHERE USERNAME = '%s';
+            """ %(username)
+
+            cursor = conn.execute(sqlQueryUsername)
+            usernamesFetched = list(cursor.fetchall())
+
+            cursor.close()
+            conn.close()
+
+            # Username does not exist in database.
+            # create new username.
+            if (len(usernamesFetched) == 0):
+                return "Account Created"
+
+            # Username does exist!
+            else:
+                return create_account_page(error_msg=\
+                "Username: %s already exists!" %(username))
+
+    # That should not happen.
     else:
         return "<b>Account Creation Error: GET METHOD</b>"
 
