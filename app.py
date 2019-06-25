@@ -30,6 +30,7 @@ def load_index():
 # Handles user login.
 def login_handler():
     global DATABASE_FILE
+    global hostname, portNum
     resultHTML = "" # what to return
 
     # The request method should be POST
@@ -53,7 +54,11 @@ def login_handler():
 
         cursor = conn.execute(sqlCheckLoginInfomation)
         if len(cursor.fetchall()) <= 0:
-            resultHTML = "<h1>LOGIN INCORRECT</h1>"
+            resultHTML = render_template("index.html",
+                hostname=hostname,
+                portNum=portNum,
+                login_error="Login Incorrect!"
+            )
         else:
             resultHTML = render_template("login.html",\
             result = result)
@@ -108,10 +113,15 @@ def create_account():
                 INSERT INTO ACCOUNTS VALUES ('%s', '%s');
                 """ %(username, password)
                 )
-                
+
                 conn.commit()
                 conn.close()
-                return "Account Created"
+                return render_template(
+                    "account_successfully_created.html",
+                    username=username,
+                    hostname=hostname,
+                    portNum=portNum
+                )
 
             # Username does exist!
             else:

@@ -80,9 +80,21 @@ footer {
 </header>
 
 <section>
-
     <!-- The navigation pane will have a login section. -->
     <nav>
+        <p>
+            <span style="color: red;">
+                {{ login_error }}
+            </span>
+            {% if login_error != "" %}
+            <script type="text/javascript">
+                var stateObj = {}; // stateObj parameter
+                window.history.replaceState(
+                    stateObj, "", "..");
+            </script>
+            {% endif %}
+        </p>
+
         <form action="http://{{hostname}}:{{portNum}}/login/" method="POST">
         <ul>
             <li> <p> User Name: </p> </li>
