@@ -72,6 +72,10 @@ def login_handler():
 def create_account():
     if request.method.upper() == "POST":
         result = request.form
+<<<<<<< HEAD
+=======
+        print(type(result.items()))
+>>>>>>> 6b40f4b03e6624724dd623a7546c9d92ea495d08
         loginInfoEntered = dict(result.items())
         username = loginInfoEntered["username"]
         password = loginInfoEntered["password"]
@@ -79,6 +83,7 @@ def create_account():
 
         if password != password_retyped:
             return create_account_page(error_msg=\
+<<<<<<< HEAD
             "Password Incorrect")
         elif password == "":
             return create_account_page(error_msg=\
@@ -110,6 +115,12 @@ def create_account():
                 "Username: %s already exists!" %(username))
 
     # That should not happen.
+=======
+            "passwords incorrect")
+        else:
+            return "Account Created"
+
+>>>>>>> 6b40f4b03e6624724dd623a7546c9d92ea495d08
     else:
         return "<b>Account Creation Error: GET METHOD</b>"
 
