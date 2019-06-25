@@ -71,6 +71,7 @@ def login_handler():
 ##
 # Handles account creation.
 def create_account():
+    global hostname, portNum
     if request.method.upper() == "POST":
         result = request.form
         loginInfoEntered = dict(result.items())
@@ -98,15 +99,24 @@ def create_account():
             usernamesFetched = list(cursor.fetchall())
 
             cursor.close()
-            conn.close()
+
 
             # Username does not exist in database.
             # create new username.
             if (len(usernamesFetched) == 0):
+                conn.execute("""
+                INSERT INTO ACCOUNTS VALUES ('%s', '%s');
+                """ %(username, password)
+                )
+                
+                conn.commit()
+                conn.close()
                 return "Account Created"
 
             # Username does exist!
             else:
+                conn.commit()
+                conn.close()
                 return create_account_page(error_msg=\
                 "Username: %s already exists!" %(username))
 
