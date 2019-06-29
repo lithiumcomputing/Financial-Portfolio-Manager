@@ -80,6 +80,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac7959f478f87d09fbbb55bb0bbe4ce86"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="app_8py.html#ac7959f478f87d09fbbb55bb0bbe4ce86">app.create_account_page</a> (error_msg=&quot;&quot;)</td></tr>
 <tr class="memdesc:ac7959f478f87d09fbbb55bb0bbe4ce86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the account creation page.  <a href="app_8py.html#ac7959f478f87d09fbbb55bb0bbe4ce86">More...</a><br /></td></tr>
 <tr class="separator:ac7959f478f87d09fbbb55bb0bbe4ce86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a527a6d9cd07790de878cee26e1cc51fd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="app_8py.html#a527a6d9cd07790de878cee26e1cc51fd">app.not_found</a> (error)</td></tr>
+<tr class="memdesc:a527a6d9cd07790de878cee26e1cc51fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles a 404 error.  <a href="app_8py.html#a527a6d9cd07790de878cee26e1cc51fd">More...</a><br /></td></tr>
+<tr class="separator:a527a6d9cd07790de878cee26e1cc51fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5288920ffc95ab586213c4347763775d"><td class="memItemLeft" align="right" valign="top"><a id="a5288920ffc95ab586213c4347763775d"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="app_8py.html#a5288920ffc95ab586213c4347763775d">app.main</a> ()</td></tr>
 <tr class="memdesc:a5288920ffc95ab586213c4347763775d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main Function. <br /></td></tr>
@@ -185,6 +188,34 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>app.DATABASE_FILE</
 </div><div class="memdoc">
 
 <p>Handles user login. </p>
+
+</div>
+</div>
+<a id="file_a527a6d9cd07790de878cee26e1cc51fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a527a6d9cd07790de878cee26e1cc51fd">&#9670;&nbsp;</a></span>not_found()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def app.not_found </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handles a 404 error. </p>
+<p>This happens if the user tries to access an invalid URL.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>Error Flask object.error</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A 2-tuple containing a rendered error_404.html and the integer 404. </dd></dl>
 
 </div>
 </div>

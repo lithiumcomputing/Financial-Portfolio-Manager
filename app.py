@@ -143,6 +143,18 @@ def create_account_page(error_msg=""):
     return render_template("create_account_page.html",\
     acct_creation_error=error_msg)
 
+# Error Handlers
+@app.errorhandler(404)
+##
+# Handles a 404 error. This happens if the user
+# tries to access an invalid URL.
+#
+# @param error Error Flask object.error
+#
+# @return A 2-tuple containing a rendered
+# error_404.html and the integer 404.
+def not_found(error):
+    return (render_template("error_404.html"), 404)
 
 ##
 # Main Function
