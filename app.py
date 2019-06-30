@@ -7,7 +7,7 @@
 
 
 # Imports
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 import sqlite3
 
 # Flask App Global Variables
@@ -23,9 +23,16 @@ DATABASE_FILE = "PortfolioAccounts.db"
 # @return index.html
 def load_index():
     global hostname, portNum
-    return render_template("index.html", hostname=hostname,\
-        portNum=portNum)
 
+    # Check if the user is logged in.
+    username = request.cookies.get("username")
+    isLoggedIn = request.cookies.get("isLoggedIn")
+    if username == None or isLoggedIn != "True":
+        return render_template("index.html", hostname=hostname,\
+            portNum=portNum, username = "", isLoggedIn = "False")
+    else:
+        return render_template("index.html", hostname=hostname,\
+            portNum=portNum, username = username, isLoggedIn = "True")
 
 @app.route("/login/", methods = ["GET", "POST"])
 ##
@@ -66,8 +73,17 @@ def login_handler():
         else:
             resultHTML = render_template("login.html",\
             result = result)
-        conn.close()
 
+            # Store Login Information in the site's cookie
+            resp = make_response(resultHTML)
+            resp.set_cookie("username", username)
+            resp.set_cookie("isLoggedIn", "True")
+
+            # Close DB, return resp
+            conn.close()
+            return resp
+
+        conn.close()
         return resultHTML
 
     # Return an error page, stating that there is something

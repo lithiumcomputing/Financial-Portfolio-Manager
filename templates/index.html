@@ -95,6 +95,9 @@ footer {
             {% endif %}
         </p>
 
+        <!-- Post the form if no user is logged in yet. -->
+
+        {% if username == "" or isLoggedIn != "True" %}
         <form action="http://{{hostname}}:{{portNum}}/login/" method="POST">
         <ul>
             <li> <p> User Name: </p> </li>
@@ -110,6 +113,15 @@ footer {
                 Create Account
             </button>
         </form>
+
+        {% elif username == "" %}
+        <p> <b> ERROR: LOGGED IN AS BLANK USER </b> </p>
+
+        {% else %}
+
+        <p> Logged in as: <b> {{username}} </b> </p>
+
+        {% endif %}
     </nav>
 
     <!-- Main Website Description -->
