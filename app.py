@@ -91,6 +91,21 @@ def login_handler():
     else:
         return "<b> GET METHOD ERROR </b>"
 
+@app.route("/logout")
+##
+# Handles logout event. Resets cookies' login information.
+#
+# @return logout.html
+def logout_handler():
+    global hostname, portNum
+    resp = fl.make_response(fl.render_template("logout.html",\
+        logoutSuccess = "True", hostname=hostname,\
+        portNum = portNum))
+    resp.set_cookie("username", "")
+    resp.set_cookie("isLoggedIn", "False")
+    return resp
+
+
 @app.route("/create_account_page/create_account",
     methods = ["GET", "POST"])
 ##

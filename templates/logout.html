@@ -1,0 +1,28 @@
+<!--
+Author: Jim Li
+Date: June 30th, 2019
+
+Logout page. Upon success, the logout page should display a success message
+and prompts or redirects the user back to the home page.
+
+Upon failure, this file should display a logout error.
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        {% if logoutSuccess == "True": %}
+        <p>Logout successful!</p>
+
+        <a href="http://{{hostname}}:{{portNum}}">Return to home page.</a>
+
+        {% else: %}
+        <p> LOGOUT ERROR! CONTACT SYSADMIN! </p>
+
+        {% endif %}
+    </body>
+</html>
