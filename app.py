@@ -19,6 +19,8 @@ DATABASE_FILE = "PortfolioAccounts.db"
 @app.route("/")
 ##
 # Loads the home page.
+#
+# @return index.html
 def load_index():
     global hostname, portNum
     return render_template("index.html", hostname=hostname,\
@@ -28,6 +30,8 @@ def load_index():
 @app.route("/login/", methods = ["GET", "POST"])
 ##
 # Handles user login.
+#
+# @return login.html
 def login_handler():
     global DATABASE_FILE
     global hostname, portNum
@@ -75,6 +79,8 @@ def login_handler():
     methods = ["GET", "POST"])
 ##
 # Handles account creation.
+#
+# @return Success or fail HTML file.
 def create_account():
     global hostname, portNum
     if request.method.upper() == "POST":
@@ -139,6 +145,8 @@ def create_account():
 # Displays the account creation page.
 #
 # @param error_msg Error Message of account creation.
+#
+# @return create_account_page.html
 def create_account_page(error_msg=""):
     return render_template("create_account_page.html",\
     acct_creation_error=error_msg)
