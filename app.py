@@ -7,11 +7,11 @@
 
 
 # Imports
-from flask import Flask, render_template, request, make_response
+import flask as fl
 import sqlite3
 
 # Flask App Global Variables
-app = Flask(__name__)
+app = fl.Flask(__name__)
 hostname = "192.168.0.17"
 portNum = 5000
 DATABASE_FILE = "PortfolioAccounts.db"
@@ -25,13 +25,13 @@ def load_index():
     global hostname, portNum
 
     # Check if the user is logged in.
-    username = request.cookies.get("username")
-    isLoggedIn = request.cookies.get("isLoggedIn")
+    username = fl.request.cookies.get("username")
+    isLoggedIn = fl.request.cookies.get("isLoggedIn")
     if username == None or isLoggedIn != "True":
-        return render_template("index.html", hostname=hostname,\
+        return fl.render_template("index.html", hostname=hostname,\
             portNum=portNum, username = "", isLoggedIn = "False")
     else:
-        return render_template("index.html", hostname=hostname,\
+        return fl.render_template("index.html", hostname=hostname,\
             portNum=portNum, username = username, isLoggedIn = "True")
 
 @app.route("/login/", methods = ["GET", "POST"])
@@ -45,9 +45,9 @@ def login_handler():
     resultHTML = "" # what to return
 
     # The request method should be POST
-    if request.method == "POST":
+    if fl.request.method == "POST":
         # Get Login Information entered from the user.
-        result = request.form
+        result = fl.request.form
         loginInfoEntered = dict(result.items())
         username = loginInfoEntered["username"]
         password = loginInfoEntered["password"]
@@ -65,17 +65,17 @@ def login_handler():
 
         cursor = conn.execute(sqlCheckLoginInfomation)
         if len(cursor.fetchall()) <= 0:
-            resultHTML = render_template("index.html",
+            resultHTML = fl.render_template("index.html",
                 hostname=hostname,
                 portNum=portNum,
                 login_error="Login Incorrect!"
             )
         else:
-            resultHTML = render_template("login.html",\
+            resultHTML = fl.render_template("login.html",\
             result = result)
 
             # Store Login Information in the site's cookie
-            resp = make_response(resultHTML)
+            resp = fl.make_response(resultHTML)
             resp.set_cookie("username", username)
             resp.set_cookie("isLoggedIn", "True")
 
@@ -99,8 +99,8 @@ def login_handler():
 # @return Success or fail HTML file.
 def create_account():
     global hostname, portNum
-    if request.method.upper() == "POST":
-        result = request.form
+    if fl.request.method.upper() == "POST":
+        result = fl.request.form
         loginInfoEntered = dict(result.items())
         username = loginInfoEntered["username"]
         password = loginInfoEntered["password"]
@@ -138,7 +138,7 @@ def create_account():
 
                 conn.commit()
                 conn.close()
-                return render_template(
+                return fl.render_template(
                     "account_successfully_created.html",
                     username=username,
                     hostname=hostname,
@@ -164,7 +164,7 @@ def create_account():
 #
 # @return create_account_page.html
 def create_account_page(error_msg=""):
-    return render_template("create_account_page.html",\
+    return fl.render_template("create_account_page.html",\
     acct_creation_error=error_msg)
 
 # Error Handlers
@@ -178,7 +178,7 @@ def create_account_page(error_msg=""):
 # @return A 2-tuple containing a rendered
 # error_404.html and the integer 404.
 def not_found(error):
-    return (render_template("error_404.html"), 404)
+    return (fl.render_template("error_404.html"), 404)
 
 ##
 # Main Function
