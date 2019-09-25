@@ -1,8 +1,3 @@
-##
-# @file app.py
-# @author Jim Li
-# @date 22 June 2019
-#
 # Manages the portfolio manager website.
 
 
@@ -16,11 +11,8 @@ hostname = "192.168.0.17"
 portNum = 5000
 DATABASE_FILE = "PortfolioAccounts.db"
 
-@app.route("/")
-##
 # Loads the home page.
-#
-# @return index.html
+@app.route("/")
 def load_index():
     global hostname, portNum
 
@@ -34,11 +26,8 @@ def load_index():
         return fl.render_template("index.html", hostname=hostname,\
             portNum=portNum, username = username, isLoggedIn = "True")
 
-@app.route("/login/", methods = ["GET", "POST"])
-##
 # Handles user login.
-#
-# @return login.html
+@app.route("/login/", methods = ["GET", "POST"])
 def login_handler():
     global DATABASE_FILE
     global hostname, portNum
@@ -91,11 +80,8 @@ def login_handler():
     else:
         return "<b> GET METHOD ERROR </b>"
 
-@app.route("/logout")
-##
 # Handles logout event. Resets cookies' login information.
-#
-# @return logout.html
+@app.route("/logout")
 def logout_handler():
     global hostname, portNum
     resp = fl.make_response(fl.render_template("logout.html",\
@@ -106,12 +92,9 @@ def logout_handler():
     return resp
 
 
+# Handles account creation.
 @app.route("/create_account_page/create_account",
     methods = ["GET", "POST"])
-##
-# Handles account creation.
-#
-# @return Success or fail HTML file.
 def create_account():
     global hostname, portNum
     if fl.request.method.upper() == "POST":
@@ -171,31 +154,20 @@ def create_account():
     else:
         return "<b>Account Creation Error: GET METHOD</b>"
 
-@app.route("/create_account_page/")
-##
 # Displays the account creation page.
-#
-# @param error_msg Error Message of account creation.
-#
-# @return create_account_page.html
+@app.route("/create_account_page/")
 def create_account_page(error_msg=""):
     return fl.render_template("create_account_page.html",\
     acct_creation_error=error_msg)
 
 # Error Handlers
-@app.errorhandler(404)
-##
+
 # Handles a 404 error. This happens if the user
 # tries to access an invalid URL.
-#
-# @param error Error Flask object.error
-#
-# @return A 2-tuple containing a rendered
-# error_404.html and the integer 404.
+@app.errorhandler(404)
 def not_found(error):
     return (fl.render_template("error_404.html"), 404)
 
-##
 # Main Function
 def main():
     app.run(host=hostname, port=portNum)
