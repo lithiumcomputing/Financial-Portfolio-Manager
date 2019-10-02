@@ -7,7 +7,7 @@ import sqlite3
 
 # Flask App Global Variables
 app = fl.Flask(__name__)
-hostname = "192.168.0.17"
+hostname = "localhost"
 portNum = 5000
 DATABASE_FILE = "PortfolioAccounts.db"
 
